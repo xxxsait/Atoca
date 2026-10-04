@@ -1,0 +1,1719 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ибрагим ❤️ Мадина</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: Georgia, "Times New Roman", serif;
+    background:
+        radial-gradient(circle at 50% 0%, #5a3942, transparent 45%),
+        linear-gradient(135deg, #120d10, #29191f, #160e12);
+    color: #38272b;
+}
+
+/* =========================
+   КНОПКА МУЗЫКИ
+========================= */
+
+.music-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+
+    width: 52px;
+    height: 52px;
+
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.35);
+
+    background: rgba(20,10,15,.75);
+    color: white;
+
+    font-size: 21px;
+    cursor: pointer;
+
+    backdrop-filter: blur(10px);
+
+    transition: .3s;
+}
+
+.music-button:hover {
+    transform: scale(1.1);
+}
+
+/* =========================
+   КНИГА
+========================= */
+
+.book-container {
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    perspective: 2000px;
+}
+
+.book {
+    position: relative;
+
+    width: min(1050px, 92vw);
+    height: min(700px, 88vh);
+
+    perspective: 2000px;
+}
+
+/* =========================
+   СТРАНИЦА
+========================= */
+
+.page {
+    position: absolute;
+    inset: 0;
+
+    padding: 55px 65px;
+
+    overflow-y: auto;
+
+    background:
+        linear-gradient(
+            rgba(255,255,255,.75),
+            rgba(255,255,255,.75)
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent 0,
+            transparent 28px,
+            rgba(130,80,80,.08) 29px
+        ),
+        #f4ead8;
+
+    border-radius: 5px 15px 15px 5px;
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.5),
+        inset 10px 0 20px rgba(80,40,40,.08);
+
+    transform-origin: left center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    scrollbar-width: thin;
+}
+
+.page.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 10;
+
+    animation: pageAppear .7s ease forwards;
+}
+
+/* перелистывание вперед */
+
+.page.turn-next {
+    visibility: visible;
+    z-index: 50;
+
+    animation:
+        turnNext .9s
+        cubic-bezier(.65,.05,.36,1)
+        forwards;
+}
+
+/* перелистывание назад */
+
+.page.turn-prev {
+    visibility: visible;
+    z-index: 50;
+
+    animation:
+        turnPrev .9s
+        cubic-bezier(.65,.05,.36,1)
+        forwards;
+}
+
+@keyframes pageAppear {
+
+    from {
+        opacity: 0;
+        transform:
+            translateX(35px)
+            scale(.98);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateX(0)
+            scale(1);
+    }
+}
+
+@keyframes turnNext {
+
+    0% {
+        transform: rotateY(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: rotateY(-105deg);
+        opacity: 0;
+    }
+}
+
+@keyframes turnPrev {
+
+    0% {
+        transform: rotateY(105deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: rotateY(0deg);
+        opacity: 1;
+    }
+}
+
+/* =========================
+   ОБЛОЖКА
+========================= */
+
+.cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            rgba(45,20,28,.78),
+            rgba(45,20,28,.92)
+        ),
+        url("photo1.jpg") center/cover;
+}
+
+.cover::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 22px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.35);
+
+    pointer-events: none;
+}
+
+.cover-small {
+    font-size: 14px;
+
+    letter-spacing: 6px;
+
+    text-transform: uppercase;
+
+    opacity: .8;
+
+    margin-bottom: 25px;
+}
+
+.cover h1 {
+    font-size:
+        clamp(48px, 7vw, 85px);
+
+    font-weight: normal;
+
+    letter-spacing: 3px;
+}
+
+.cover .and {
+    font-size: 30px;
+
+    opacity: .7;
+
+    margin: 10px;
+}
+
+.cover p {
+    margin-top: 20px;
+
+    font-size: 19px;
+
+    font-style: italic;
+
+    opacity: .85;
+}
+
+.cover-heart {
+    margin-top: 30px;
+
+    font-size: 60px;
+
+    animation:
+        heartbeat 2s infinite;
+}
+
+@keyframes heartbeat {
+
+    0%,100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+/* =========================
+   ЗАГОЛОВКИ
+========================= */
+
+.chapter {
+    color: #a15d67;
+
+    font-size: 14px;
+
+    letter-spacing: 5px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 10px;
+}
+
+h2 {
+    color: #4b2930;
+
+    font-size:
+        clamp(32px, 4vw, 50px);
+
+    font-weight: normal;
+
+    margin-bottom: 15px;
+}
+
+.date {
+    color: #a15d67;
+
+    font-size: 18px;
+
+    font-style: italic;
+
+    margin-bottom: 25px;
+}
+
+/* =========================
+   ТЕКСТ
+========================= */
+
+.story {
+    font-size: 18px;
+
+    line-height: 1.85;
+}
+
+.story p {
+    margin-bottom: 18px;
+}
+
+/* =========================
+   АНИМАЦИЯ ТЕКСТА
+========================= */
+
+.reveal {
+    opacity: 0;
+
+    transform:
+        translateY(25px);
+}
+
+.page.active .reveal {
+    animation:
+        textReveal .8s ease forwards;
+}
+
+.page.active .reveal:nth-child(1) {
+    animation-delay: .15s;
+}
+
+.page.active .reveal:nth-child(2) {
+    animation-delay: .35s;
+}
+
+.page.active .reveal:nth-child(3) {
+    animation-delay: .55s;
+}
+
+.page.active .reveal:nth-child(4) {
+    animation-delay: .75s;
+}
+
+.page.active .reveal:nth-child(5) {
+    animation-delay: .95s;
+}
+
+.page.active .reveal:nth-child(6) {
+    animation-delay: 1.15s;
+}
+
+.page.active .reveal:nth-child(7) {
+    animation-delay: 1.35s;
+}
+
+@keyframes textReveal {
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+/* =========================
+   ФОТО
+========================= */
+
+.photo-box {
+    width: 100%;
+
+    margin: 30px 0;
+
+    text-align: center;
+}
+
+.photo-box img {
+    width:
+        min(100%, 650px);
+
+    max-height: 360px;
+
+    object-fit: cover;
+
+    padding: 8px;
+
+    background: white;
+
+    border-radius: 5px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.25);
+
+    transform:
+        rotate(-1deg);
+
+    transition: .5s;
+}
+
+.photo-box img:hover {
+    transform:
+        rotate(0deg)
+        scale(1.02);
+}
+
+/* =========================
+   ВИДЕО
+========================= */
+
+.story-video {
+    width:
+        min(100%, 650px);
+
+    max-height: 390px;
+
+    object-fit: cover;
+
+    padding: 8px;
+
+    background: white;
+
+    border-radius: 5px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.25);
+
+    transform:
+        rotate(-1deg);
+
+    transition: .5s;
+}
+
+.story-video:hover {
+    transform:
+        rotate(0deg)
+        scale(1.02);
+}
+
+.photo-caption {
+    margin-top: 12px;
+
+    color: #79545a;
+
+    font-size: 14px;
+
+    font-style: italic;
+}
+
+/* =========================
+   ЦИТАТЫ
+========================= */
+
+.quote {
+    margin: 25px 0;
+
+    padding: 20px 25px;
+
+    border-left:
+        3px solid #a15d67;
+
+    background:
+        rgba(161,93,103,.07);
+
+    font-size: 19px;
+
+    font-style: italic;
+}
+
+/* =========================
+   ФИНАЛ
+========================= */
+
+.final-page {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+}
+
+.final-content {
+    max-width: 750px;
+}
+
+.final-content h2 {
+    font-size:
+        clamp(35px,5vw,60px);
+}
+
+.final-heart {
+    font-size: 65px;
+
+    margin: 20px;
+
+    animation:
+        heartbeat 2s infinite;
+}
+
+.question {
+    margin-top: 30px;
+
+    padding: 30px;
+
+    border:
+        1px solid
+        rgba(161,93,103,.45);
+
+    background:
+        rgba(255,255,255,.35);
+}
+
+.question h3 {
+    color: #8d4654;
+
+    font-size:
+        clamp(30px,5vw,55px);
+
+    font-weight: normal;
+}
+
+/* =========================
+   КНОПКИ
+========================= */
+
+.controls {
+    position: fixed;
+
+    left: 50%;
+    bottom: 25px;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 9999;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 10px 15px;
+
+    border-radius: 40px;
+
+    background:
+        rgba(25,15,19,.82);
+
+    backdrop-filter:
+        blur(12px);
+}
+
+.controls button {
+    width: 45px;
+    height: 45px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #f4ead8;
+
+    color: #4b2930;
+
+    font-size: 25px;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.controls button:hover {
+    transform: scale(1.1);
+}
+
+.page-counter {
+    min-width: 70px;
+
+    color: white;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+/* =========================
+   ТЕЛЕФОН
+========================= */
+
+@media(max-width:700px) {
+
+    .book {
+        width: 94vw;
+        height: 82vh;
+    }
+
+    .page {
+        padding:
+            35px
+            25px
+            90px;
+    }
+
+    .story {
+        font-size: 16px;
+
+        line-height: 1.7;
+    }
+
+    h2 {
+        font-size: 32px;
+    }
+
+    .cover h1 {
+        font-size: 45px;
+    }
+
+    .music-button {
+        top: 12px;
+        right: 12px;
+    }
+
+    .controls {
+        bottom: 12px;
+    }
+
+    .story-video {
+        max-height: 300px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     МУЗЫКА
+========================= -->
+
+<audio id="music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button
+    class="music-button"
+    id="musicButton">
+    ♫
+</button>
+
+
+<!-- =========================
+     КНИГА
+========================= -->
+
+<div class="book-container">
+
+<div class="book">
+
+
+<!-- =========================
+     ОБЛОЖКА
+========================= -->
+
+<section class="page cover active">
+
+    <div class="cover-small reveal">
+        Наша история
+    </div>
+
+    <h1 class="reveal">
+
+        Ибрагим
+
+        <div class="and">
+            &
+        </div>
+
+        Мадина
+
+    </h1>
+
+    <p class="reveal">
+        История, которую я хочу сохранить навсегда
+    </p>
+
+    <div class="cover-heart reveal">
+        ♥
+    </div>
+
+</section>
+
+
+<!-- =========================
+     ГЛАВА 1
+========================= -->
+
+<section class="page">
+
+<div class="chapter reveal">
+    Глава I
+</div>
+
+<h2 class="reveal">
+    23 августа
+</h2>
+
+<div class="date reveal">
+    Тот самый день
+</div>
+
+<div class="story">
+
+<p class="reveal">
+    Меня зовут Ибрагим.
+    Её зовут Мадина.
+</p>
+
+<p class="reveal">
+    Я встретил её на девишнике.
+    Это было 23 августа.
+    Я увидел её только мельком,
+    так и не решившись с ней заговорить.
+</p>
+
+<p class="reveal">
+    Тогда я даже представить не мог,
+    насколько этот короткий момент
+    изменит мою жизнь.
+</p>
+
+<p class="reveal">
+    Я думал, что это был последний день,
+    когда я её вижу.
+</p>
+
+</div>
+
+<div class="photo-box reveal">
+
+<img
+    src="photo2.jpg"
+    alt="23 августа">
+
+<div class="photo-caption">
+    Начало нашей истории...
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     ГЛАВА 2
+========================= -->
+
+<section class="page">
+
+<div class="chapter reveal">
+    Глава II
+</div>
+
+<h2 class="reveal">
+    Малгручи
+</h2>
+
+<div class="date reveal">
+    26 августа
+</div>
+
+<div class="story">
+
+<p class="reveal">
+    День Малгручи.
+</p>
+
+<p class="reveal">
+    Увидев её в таком синем
+    национальном платьице,
+    я не мог оторвать от неё глаза.
+</p>
+
+<p class="reveal">
+    В этот момент я остановил Ханзи
+    и спросил:
+</p>
+
+<div class="quote reveal">
+
+    «Ханзи, а кто это возле Гули?»
+
+    <br><br>
+
+    «Это Мадина, наша дружка».
+
+</div>
+
+<p class="reveal">
+    В этот момент я задумался,
+    что хочу попробовать с ней пообщаться.
+</p>
+
+<p class="reveal">
+    Но я боялся, что могу оказаться
+    в чёрном списке.
+</p>
+
+<p class="reveal">
+    Поэтому так и не решился подойти.
+</p>
+
+</div>
+
+<div class="photo-box reveal">
+
+<img
+    src="photo3.jpg"
+    alt="Малгручи">
+
+<div class="photo-caption">
+    26 августа — день,
+    когда я снова её увидел.
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     ГЛАВА 3
+     ЭТО 4-Я СТРАНИЦА
+     ЗДЕСЬ ВИДЕО
+========================= -->
+
+<section class="page">
+
+<div class="chapter reveal">
+    Глава III
+</div>
+
+<h2 class="reveal">
+    Свадьба
+</h2>
+
+<div class="date reveal">
+    27 августа
+</div>
+
+<div class="story">
+
+<p class="reveal">
+    27 августа мы поехали
+    за выкупом невесты.
+    Пройдя все игры,
+    я снова увидел её.
+</p>
+
+<p class="reveal">
+    Такой красивой и милой,
+    в белом платье с цветочками.
+</p>
+
+<p class="reveal">
+    После выкупа мы поехали
+    на Кундуз той.
+    Там она была просто неотразима,
+    а её шлейф парфюма
+    был потрясающим.
+</p>
+
+<p class="reveal">
+    После Кундуз тоя мы поехали
+    на бракосочетание,
+    где она сверкала от радости
+    за свадьбу своей сестры.
+</p>
+
+</div>
+
+
+<!-- ВИДЕО -->
+
+<div class="photo-box reveal">
+
+<video
+    class="story-video"
+    controls
+    playsinline
+    preload="metadata">
+
+    <source
+        src="video4.mp4"
+        type="video/mp4">
+
+    Ваш браузер не поддерживает видео.
+
+</video>
+
+<div class="photo-caption">
+    27 августа ❤️
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     ГЛАВА 4
+========================= -->
+
+<section class="page">
+
+<div class="chapter reveal">
+    Глава IV
+</div>
+
+<h2 class="reveal">
+    20:44
+</h2>
+
+<div class="story">
+
+<p class="reveal">
+    Время 19:00.
+    Я звоню им узнать, где они.
+    Мне сказали, что собираются ехать.
+</p>
+
+<p class="reveal">
+    20:14 — я жду их.
+</p>
+
+<p class="reveal">
+    20:44 — я вижу по 2ГИС,
+    что они уже подъехали.
+    Я выхожу, чтобы их встретить.
+</p>
+
+<p class="reveal">
+    И тогда я снова был очарован
+    её синим платьем,
+    которое ей невероятно шло.
+</p>
+
+<p class="reveal">
+    Перед тем как зайти,
+    она не могла завязать своё платье.
+    Я подумал:
+    «Сейчас предложу свою помощь
+    и смогу с ней заговорить».
+</p>
+
+<div class="quote reveal">
+
+    — Тебе помочь?
+
+    <br><br>
+
+    — Нет, не надо.
+
+</div>
+
+<p class="reveal">
+    И в этот момент я подумал,
+    что я ей совсем не интересен.
+</p>
+
+</div>
+
+<div class="photo-box reveal">
+
+<img
+    src="photo5.jpg"
+    alt="Синий наряд">
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     ГЛАВА 5
+========================= -->
+
+<section class="page">
+
+<div class="chapter reveal">
+    Глава V
+</div>
+
+<h2 class="reveal">
+    Первый танец
+</h2>
+
+<div class="story">
+
+<p class="reveal">
+    Но я всё равно не мог
+    оторвать от неё взгляда.
+    Она была невероятно красивая.
+</p>
+
+<p class="reveal">
+    Я смотрел на неё,
+    делая вид, будто смотрю на жениха.
+    Но на самом деле
+    любовался только ею.
+</p>
+
+<p class="reveal">
+    На первом же антракте
+    я пригласил её на танец.
+    Я думал, что она скажет «нет».
+</p>
+
+<p class="reveal">
+    Но она согласилась.
+</p>
+
+<p class="reveal">
+    И в этот момент я сказал себе:
+    «Я должен попробовать
+    с ней общаться».
+</p>
+
+<p class="reveal">
+    Потом начались клубные песни,
+    и я не смог нормально потанцевать.
+</p>
+
+<p class="reveal">
+    Но пришло время второй
+    уйгурской песни.
+</p>
+
+<div class="quote reveal">
+
+    «Крыса,
+    как ты могла меня кинуть?»
+
+</div>
+
+</div>
+
+<div class="photo-box reveal">
+
+<img
+    src="photo6.jpg"
+    alt="Первый танец">
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     ГЛАВА 6
+========================= -->
+
+<section class="page">
+
+<div class="chapter reveal">
+    Глава VI
+</div>
+
+<h2 class="reveal">
+    Парень
+</h2>
+
+<div class="story">
+
+<p class="reveal">
+    После конца первого антракта
+    мы сели по местам.
+</p>
+
+<p class="reveal">
+    Тогда я спросил у невесты:
+</p>
+
+<div class="quote reveal">
+
+    «У Мадины есть парень?»
+
+    <br><br>
+
+    «Да, у неё есть парень».
+
+</div>
+
+<p class="reveal">
+    В этот момент я понял,
+    что я ей, скорее всего,
+    совсем не интересен,
+    поскольку у неё есть парень.
+</p>
+
+<p class="reveal">
+    После этого я к ней даже
+    не пытался подходить.
+</p>
+
+<p class="reveal">
+    Так я и ушёл,
+    не попытавшись с ней познакомиться.
+</p>
+
+<p class="reveal">
+    Но потом я увидел,
+    что она посмотрела
+    мои истории в Instagram.
+</p>
+
+</div>
+
+<div class="photo-box reveal">
+
+<img
+    src="photo7.jpg"
+    alt="Воспоминание">
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     ГЛАВА 7
+========================= -->
+
+<section class="page">
+
+<div class="chapter reveal">
+    Глава VII
+</div>
+
+<h2 class="reveal">
+    7 сентября
+</h2>
+
+<div class="date reveal">
+    Знакомство
+</div>
+
+<div class="story">
+
+<p class="reveal">
+    7 сентября я решился
+    ей написать.
+</p>
+
+<p class="reveal">
+    Страх, что могу оказаться
+    в чёрном списке,
+    всё ещё не оставлял меня.
+</p>
+
+<p class="reveal">
+    Но я всё равно решился.
+</p>
+
+<div class="quote reveal">
+
+    «Привет )»
+
+    <br><br>
+
+    «Привет»
+
+</div>
+
+<p class="reveal">
+    И так началась наша дружба
+    с Мадиной.
+</p>
+
+<p class="reveal">
+    Мы общались с ней
+    обо всём на свете.
+</p>
+
+<p class="reveal">
+    Ведь тогда я даже не рассчитывал,
+    что у меня могут появиться
+    к ней чувства.
+</p>
+
+</div>
+
+<div class="photo-box reveal">
+
+<img
+    src="photo8.jpg"
+    alt="7 сентября">
+
+<div class="photo-caption">
+    Сообщение,
+    с которого всё началось.
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     ГЛАВА 8
+========================= -->
+
+<section class="page">
+
+<div class="chapter reveal">
+    Глава VIII
+</div>
+
+<h2 class="reveal">
+    Сейчас
+</h2>
+
+<div class="story">
+
+<p class="reveal">
+    Сейчас у нас всё отлично.
+</p>
+
+<p class="reveal">
+    И когда я вспоминаю всё это,
+    мне становится интересно,
+    как один короткий взгляд
+    23 августа смог привести
+    меня сюда.
+</p>
+
+<p class="reveal">
+    Тогда я не решился подойти.
+    Потом снова не решился.
+    Потом подумал,
+    что у неё есть парень.
+</p>
+
+<p class="reveal">
+    Но всё-таки 7 сентября
+    я написал тебе.
+</p>
+
+<p class="reveal">
+    И теперь ты стала для меня
+    намного больше,
+    чем просто человек,
+    которого я когда-то увидел
+    на свадьбе.
+</p>
+
+</div>
+
+<div class="photo-box reveal">
+
+<img
+    src="photo2.jpg"
+    alt="Мы">
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     ФИНАЛ
+========================= -->
+
+<section class="page final-page">
+
+<div class="final-content">
+
+<div class="chapter reveal">
+    Последняя страница
+</div>
+
+<h2 class="reveal">
+    Для тебя, Мадина
+</h2>
+
+<div class="final-heart reveal">
+    ♥
+</div>
+
+<div class="story">
+
+<p class="reveal">
+    Мадина, скоро твой день рождения.
+</p>
+
+<p class="reveal">
+    Я всё это делаю для тебя
+    не просто так.
+</p>
+
+<p class="reveal">
+    Я хочу показать тебе,
+    насколько сильно я тебя люблю.
+</p>
+
+<p class="reveal">
+    Ведь ты тот человек,
+    который даёт мне тепло,
+    когда ты рядом.
+</p>
+
+<p class="reveal">
+    Когда я вижу тебя —
+    весь мир меняется.
+</p>
+
+<p class="reveal">
+    Я тебя очень сильно люблю.
+</p>
+
+</div>
+
+<div class="question reveal">
+
+<p style="margin-bottom:20px;">
+    И поэтому я хочу
+    задать тебе один вопрос...
+</p>
+
+<h3>
+    Мадина,<br>
+    ты будешь моей девушкой? ❤️
+</h3>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+</div>
+
+
+<!-- =========================
+     УПРАВЛЕНИЕ
+========================= -->
+
+<div class="controls">
+
+<button id="prevButton">
+    ‹
+</button>
+
+<div class="page-counter">
+
+<span id="currentPage">
+    1
+</span>
+
+/
+
+<span id="totalPages">
+    10
+</span>
+
+</div>
+
+<button id="nextButton">
+    ›
+</button>
+
+</div>
+
+
+<script>
+
+/* =========================
+   СТРАНИЦЫ
+========================= */
+
+const pages =
+    document.querySelectorAll(".page");
+
+let currentPage = 0;
+
+let isAnimating = false;
+
+const currentNumber =
+    document.getElementById(
+        "currentPage"
+    );
+
+const totalNumber =
+    document.getElementById(
+        "totalPages"
+    );
+
+totalNumber.textContent =
+    pages.length;
+
+
+/* =========================
+   ПЕРЕЛИСТЫВАНИЕ
+========================= */
+
+function goToPage(nextPage) {
+
+    if (isAnimating) return;
+
+    if (
+        nextPage < 0 ||
+        nextPage >= pages.length
+    ) {
+        return;
+    }
+
+    if (nextPage === currentPage) {
+        return;
+    }
+
+    isAnimating = true;
+
+    const oldPage =
+        pages[currentPage];
+
+    const newPage =
+        pages[nextPage];
+
+
+    oldPage.classList.remove(
+        "active"
+    );
+
+
+    if (nextPage > currentPage) {
+
+        oldPage.classList.add(
+            "turn-next"
+        );
+
+        newPage.classList.add(
+            "active"
+        );
+
+    } else {
+
+        newPage.classList.add(
+            "turn-prev"
+        );
+
+        newPage.classList.add(
+            "active"
+        );
+    }
+
+
+    setTimeout(() => {
+
+        pages.forEach(
+            (page, index) => {
+
+                if (
+                    index !== nextPage
+                ) {
+
+                    page.classList.remove(
+                        "active",
+                        "turn-next",
+                        "turn-prev"
+                    );
+                }
+
+            }
+        );
+
+        newPage.classList.add(
+            "active"
+        );
+
+        currentPage =
+            nextPage;
+
+        currentNumber.textContent =
+            currentPage + 1;
+
+        isAnimating = false;
+
+    }, 900);
+}
+
+
+/* =========================
+   КНОПКИ
+========================= */
+
+document
+    .getElementById("nextButton")
+    .addEventListener(
+        "click",
+        () => {
+            goToPage(
+                currentPage + 1
+            );
+        }
+    );
+
+document
+    .getElementById("prevButton")
+    .addEventListener(
+        "click",
+        () => {
+            goToPage(
+                currentPage - 1
+            );
+        }
+    );
+
+
+/* =========================
+   КЛАВИАТУРА
+========================= */
+
+document.addEventListener(
+    "keydown",
+    (event) => {
+
+        if (
+            event.key ===
+            "ArrowRight"
+        ) {
+            goToPage(
+                currentPage + 1
+            );
+        }
+
+        if (
+            event.key ===
+            "ArrowLeft"
+        ) {
+            goToPage(
+                currentPage - 1
+            );
+        }
+
+    }
+);
+
+
+/* =========================
+   СВАЙП НА ТЕЛЕФОНЕ
+========================= */
+
+let touchStartX = 0;
+
+document.addEventListener(
+    "touchstart",
+    (event) => {
+
+        touchStartX =
+            event.changedTouches[0]
+                .screenX;
+
+    }
+);
+
+document.addEventListener(
+    "touchend",
+    (event) => {
+
+        const touchEndX =
+            event.changedTouches[0]
+                .screenX;
+
+        const difference =
+            touchStartX -
+            touchEndX;
+
+        if (
+            Math.abs(difference) < 50
+        ) {
+            return;
+        }
+
+        if (difference > 0) {
+
+            goToPage(
+                currentPage + 1
+            );
+
+        } else {
+
+            goToPage(
+                currentPage - 1
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================
+   МУЗЫКА
+========================= */
+
+const music =
+    document.getElementById(
+        "music"
+    );
+
+const musicButton =
+    document.getElementById(
+        "musicButton"
+    );
+
+let musicPlaying = false;
+
+
+musicButton.addEventListener(
+    "click",
+    () => {
+
+        if (!musicPlaying) {
+
+            music.play()
+                .then(() => {
+
+                    musicPlaying = true;
+
+                    musicButton.textContent =
+                        "❚❚";
+
+                })
+                .catch(() => {
+
+                    alert(
+                        "Проверь, что music.mp3 находится рядом с index.html"
+                    );
+
+                });
+
+        } else {
+
+            music.pause();
+
+            musicPlaying = false;
+
+            musicButton.textContent =
+                "♫";
+        }
+
+    }
+);
+
+
+/* =========================
+   ЗАПУСК МУЗЫКИ
+========================= */
+
+document.addEventListener(
+    "click",
+    () => {
+
+        if (!musicPlaying) {
+
+            music.play()
+                .then(() => {
+
+                    musicPlaying = true;
+
+                    musicButton.textContent =
+                        "❚❚";
+
+                })
+                .catch(() => {});
+
+        }
+
+    },
+    { once: true }
+);
+
+</script>
+
+</body>
+</html>
